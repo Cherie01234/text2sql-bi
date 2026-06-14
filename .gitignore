@@ -7,3 +7,4 @@ venv/
 data/*.duckdb
 .streamlit/secrets.toml
 .DS_Store
+assets/demo_last.png

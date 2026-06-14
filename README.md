@@ -1,5 +1,7 @@
 # 🗄️ Text-to-SQL BI — データに話しかけるBI
 
+[![CI](https://github.com/Cherie01234/text2sql-bi/actions/workflows/ci.yml/badge.svg)](https://github.com/Cherie01234/text2sql-bi/actions/workflows/ci.yml)
+
 自然言語の質問を **DuckDB の SQL に変換 → 実際に実行 → 結果テーブル＋自動チャート** で返す、対話型 BI デモです。
 「学習済みモデルをラップしただけ」で終わらせず、**精度を数値で計測**し、**SQL が壊れない仕組み**を備えていることに重点を置いています。
 
