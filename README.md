@@ -22,10 +22,22 @@
 
 | Model | Execution Accuracy | 平均リトライ |
 |---|---|---|
-| `openai/gpt-4o-mini` | _（`run_eval.py` を実行して記入）_ | — |
-| `anthropic/claude-3.5-sonnet` | _（同上）_ | — |
+| `openai/gpt-4o-mini` | 100% (6/6) | 0.0 |
+| `deepseek/deepseek-v4-flash` | 100% (6/6) | 0.0 |
+| `google/gemini-2.5-flash-lite` | 100% (6/6) | 0.0 |
 
 > ベンチマークは [`eval/benchmark.jsonl`](eval/benchmark.jsonl)（質問↔正解SQL 6問）。本番では BIRD / Spider のサブセットに差し替え可能。
+
+### 評価で得られた知見（指標の限界とベンチ改善）
+
+初回計測では全モデルが **5/6 (83%)** で、同一の問題（"最も注文を処理した従業員は？"）だけが落ちました。
+FAIL の生成SQLを分析したところ、**3モデルともSQLは意味的に正しく**、原因はモデル側ではなく評価指標にありました:
+
+- Execution Accuracy は**結果セットの完全一致**で判定するため、**列射影（projection）の違いに敏感**。
+- 元の質問は出力列を指定しておらず、モデルが気を利かせて `employee_id` を追加したり名前を `CONCAT` したため、中身は正しくても列構成が正解と一致せず誤判定された。
+
+対策として、正解SQLをモデル出力に合わせるのではなく、**質問文を「姓のみ返す」と一意化**してベンチを改善し、全モデル **6/6 (100%)** に。
+指標の特性を理解し、評価データ側の欠陥を切り分けて修正できることを示す一例です（[`eval/benchmark.jsonl`](eval/benchmark.jsonl) の `q3`）。
 
 ## 🏗️ アーキテクチャ
 
