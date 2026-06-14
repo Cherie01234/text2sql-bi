@@ -1,6 +1,7 @@
 __pycache__/
 *.pyc
 .env
+OpenRouter_API_Key.txt
 .venv/
 venv/
 data/*.duckdb
