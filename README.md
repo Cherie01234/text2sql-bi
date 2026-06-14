@@ -7,7 +7,7 @@
 
 ![Text-to-SQL BI demo](assets/demo.gif)
 
-> 質問: *"What are the top 3 products by total revenue?"*
+> 質問: *「売上が最も高い商品トップ3を教えて」*
 > → スキーマから関連テーブルを検索 → SQL 生成 → 構文検証 → 実行 → 棒グラフを自動描画
 
 ---

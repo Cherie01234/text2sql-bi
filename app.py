@@ -16,10 +16,10 @@ from src.self_correct import answer
 st.set_page_config(page_title="Text-to-SQL BI", page_icon="🗄️", layout="wide")
 
 EXAMPLES = [
-    "What are the top 3 products by total revenue?",
-    "How many orders did each country's customers place?",
-    "Show monthly order counts over time.",
-    "Which employee handled the most orders?",
+    "売上が最も高い商品トップ3を教えて",
+    "国ごとの注文件数は？",
+    "月別の注文件数の推移を見せて",
+    "最も多くの注文を処理した従業員は？",
 ]
 
 

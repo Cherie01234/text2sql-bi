@@ -44,7 +44,7 @@ SQL_LINES = [
     "ORDER BY revenue DESC",
     "LIMIT 3",
 ]
-QUESTION = "What are the top 3 products by total revenue?"
+QUESTION = "売上が最も高い商品トップ3を教えて"
 
 
 def font(paths, size):
@@ -141,8 +141,8 @@ def build():
         durations.append(ms)
 
     # 1) type the question
-    for i in range(0, len(QUESTION) + 1, 3):
-        add(render(QUESTION[:i], False, None, 0, 0), 40)
+    for i in range(0, len(QUESTION) + 1):
+        add(render(QUESTION[:i], False, None, 0, 0), 75)
     add(render(QUESTION, False, None, 0, 0), 500)
     # 2) press run
     add(render(QUESTION, True, "run", 0, 0), 250)
