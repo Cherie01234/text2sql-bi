@@ -1,7 +1,10 @@
 {
   "model": "google/gemini-2.5-flash-lite",
-  "evaluated_at": "2026-11-01T09:42:53",
+  "started_at": "2026-11-01T10:16:53+09:00",
+  "saved_at": "2026-11-01T10:17:12+09:00",
   "benchmark": "benchmark.jsonl",
+  "benchmark_sha256": "4c183dc5aa24bc2df006bc4f57470b5429a1ced699ca206c8ca08fe0f4366829",
+  "temperature": 0,
   "schema_top_k": 6,
   "max_retries": 2,
   "runs": [
@@ -15,42 +18,75 @@
           "passed": true,
           "retries": 0,
           "sql": "SELECT\n  p.product_name,\n  SUM(od.quantity * od.unit_price) AS total_revenue\nFROM products AS p\nJOIN order_details AS od\n  ON p.product_id = od.product_id\nGROUP BY\n  p.product_name\nORDER BY\n  total_revenue DESC\nLIMIT 3",
-          "error": ""
+          "error": "",
+          "gold_rows": 3,
+          "rows": 3,
+          "columns": [
+            "product_name",
+            "total_revenue"
+          ]
         },
         {
           "id": "q2",
           "passed": true,
           "retries": 0,
           "sql": "SELECT\n  c.country,\n  COUNT(o.order_id) AS order_count\nFROM customers AS c\nJOIN orders AS o\n  ON c.customer_id = o.customer_id\nGROUP BY\n  c.country\nORDER BY\n  order_count DESC",
-          "error": ""
+          "error": "",
+          "gold_rows": 4,
+          "rows": 4,
+          "columns": [
+            "country",
+            "order_count"
+          ]
         },
         {
           "id": "q3",
           "passed": true,
           "retries": 0,
           "sql": "SELECT\n  e.last_name\nFROM employees AS e\nJOIN orders AS o\n  ON e.employee_id = o.employee_id\nGROUP BY\n  e.employee_id,\n  e.last_name\nORDER BY\n  COUNT(o.order_id) DESC\nLIMIT 1",
-          "error": ""
+          "error": "",
+          "gold_rows": 1,
+          "rows": 1,
+          "columns": [
+            "last_name"
+          ]
         },
         {
           "id": "q4",
           "passed": true,
           "retries": 0,
           "sql": "SELECT\n  c.category_name,\n  SUM(od.quantity * od.unit_price) AS total_revenue\nFROM order_details AS od\nJOIN products AS p\n  ON od.product_id = p.product_id\nJOIN categories AS c\n  ON p.category_id = c.category_id\nGROUP BY\n  c.category_name",
-          "error": ""
+          "error": "",
+          "gold_rows": 4,
+          "rows": 4,
+          "columns": [
+            "category_name",
+            "total_revenue"
+          ]
         },
         {
           "id": "q5",
           "passed": true,
           "retries": 0,
           "sql": "SELECT\n  COUNT(product_id)\nFROM products\nWHERE\n  discontinued = TRUE",
-          "error": ""
+          "error": "",
+          "gold_rows": 1,
+          "rows": 1,
+          "columns": [
+            "count(product_id)"
+          ]
         },
         {
           "id": "q6",
           "passed": true,
           "retries": 0,
           "sql": "SELECT\n  c.company_name\nFROM customers AS c\nLEFT JOIN orders AS o\n  ON c.customer_id = o.customer_id\nWHERE\n  o.order_id IS NULL",
-          "error": ""
+          "error": "",
+          "gold_rows": 0,
+          "rows": 0,
+          "columns": [
+            "company_name"
+          ]
         }
       ]
     },
@@ -64,42 +100,75 @@
           "passed": true,
           "retries": 0,
           "sql": "SELECT\n  p.product_name,\n  SUM(od.quantity * od.unit_price) AS total_revenue\nFROM products AS p\nJOIN order_details AS od\n  ON p.product_id = od.product_id\nGROUP BY\n  p.product_name\nORDER BY\n  total_revenue DESC\nLIMIT 3",
-          "error": ""
+          "error": "",
+          "gold_rows": 3,
+          "rows": 3,
+          "columns": [
+            "product_name",
+            "total_revenue"
+          ]
         },
         {
           "id": "q2",
           "passed": true,
           "retries": 0,
           "sql": "SELECT\n  c.country,\n  COUNT(o.order_id) AS order_count\nFROM customers AS c\nJOIN orders AS o\n  ON c.customer_id = o.customer_id\nGROUP BY\n  c.country\nORDER BY\n  order_count DESC",
-          "error": ""
+          "error": "",
+          "gold_rows": 4,
+          "rows": 4,
+          "columns": [
+            "country",
+            "order_count"
+          ]
         },
         {
           "id": "q3",
           "passed": true,
           "retries": 0,
           "sql": "SELECT\n  e.last_name\nFROM employees AS e\nJOIN orders AS o\n  ON e.employee_id = o.employee_id\nGROUP BY\n  e.employee_id,\n  e.last_name\nORDER BY\n  COUNT(o.order_id) DESC\nLIMIT 1",
-          "error": ""
+          "error": "",
+          "gold_rows": 1,
+          "rows": 1,
+          "columns": [
+            "last_name"
+          ]
         },
         {
           "id": "q4",
           "passed": true,
           "retries": 0,
           "sql": "SELECT\n  c.category_name,\n  SUM(od.quantity * od.unit_price) AS total_revenue\nFROM order_details AS od\nJOIN products AS p\n  ON od.product_id = p.product_id\nJOIN categories AS c\n  ON p.category_id = c.category_id\nGROUP BY\n  c.category_name",
-          "error": ""
+          "error": "",
+          "gold_rows": 4,
+          "rows": 4,
+          "columns": [
+            "category_name",
+            "total_revenue"
+          ]
         },
         {
           "id": "q5",
           "passed": true,
           "retries": 0,
           "sql": "SELECT\n  COUNT(product_id)\nFROM products\nWHERE\n  discontinued = TRUE",
-          "error": ""
+          "error": "",
+          "gold_rows": 1,
+          "rows": 1,
+          "columns": [
+            "count(product_id)"
+          ]
         },
         {
           "id": "q6",
           "passed": true,
           "retries": 0,
           "sql": "SELECT\n  c.company_name\nFROM customers AS c\nLEFT JOIN orders AS o\n  ON c.customer_id = o.customer_id\nWHERE\n  o.order_id IS NULL",
-          "error": ""
+          "error": "",
+          "gold_rows": 0,
+          "rows": 0,
+          "columns": [
+            "company_name"
+          ]
         }
       ]
     },
@@ -113,42 +182,75 @@
           "passed": true,
           "retries": 0,
           "sql": "SELECT\n  p.product_name,\n  SUM(od.quantity * od.unit_price) AS total_revenue\nFROM products AS p\nJOIN order_details AS od\n  ON p.product_id = od.product_id\nGROUP BY\n  p.product_name\nORDER BY\n  total_revenue DESC\nLIMIT 3",
-          "error": ""
+          "error": "",
+          "gold_rows": 3,
+          "rows": 3,
+          "columns": [
+            "product_name",
+            "total_revenue"
+          ]
         },
         {
           "id": "q2",
           "passed": true,
           "retries": 0,
           "sql": "SELECT\n  c.country,\n  COUNT(o.order_id) AS order_count\nFROM customers AS c\nJOIN orders AS o\n  ON c.customer_id = o.customer_id\nGROUP BY\n  c.country\nORDER BY\n  order_count DESC",
-          "error": ""
+          "error": "",
+          "gold_rows": 4,
+          "rows": 4,
+          "columns": [
+            "country",
+            "order_count"
+          ]
         },
         {
           "id": "q3",
           "passed": true,
           "retries": 0,
           "sql": "SELECT\n  e.last_name\nFROM employees AS e\nJOIN orders AS o\n  ON e.employee_id = o.employee_id\nGROUP BY\n  e.employee_id,\n  e.last_name\nORDER BY\n  COUNT(o.order_id) DESC\nLIMIT 1",
-          "error": ""
+          "error": "",
+          "gold_rows": 1,
+          "rows": 1,
+          "columns": [
+            "last_name"
+          ]
         },
         {
           "id": "q4",
           "passed": true,
           "retries": 0,
           "sql": "SELECT\n  c.category_name,\n  SUM(od.quantity * od.unit_price) AS total_revenue\nFROM order_details AS od\nJOIN products AS p\n  ON od.product_id = p.product_id\nJOIN categories AS c\n  ON p.category_id = c.category_id\nGROUP BY\n  c.category_name",
-          "error": ""
+          "error": "",
+          "gold_rows": 4,
+          "rows": 4,
+          "columns": [
+            "category_name",
+            "total_revenue"
+          ]
         },
         {
           "id": "q5",
           "passed": true,
           "retries": 0,
           "sql": "SELECT\n  COUNT(product_id)\nFROM products\nWHERE\n  discontinued = TRUE",
-          "error": ""
+          "error": "",
+          "gold_rows": 1,
+          "rows": 1,
+          "columns": [
+            "count(product_id)"
+          ]
         },
         {
           "id": "q6",
           "passed": true,
           "retries": 0,
           "sql": "SELECT\n  c.company_name\nFROM customers AS c\nLEFT JOIN orders AS o\n  ON c.customer_id = o.customer_id\nWHERE\n  o.order_id IS NULL",
-          "error": ""
+          "error": "",
+          "gold_rows": 0,
+          "rows": 0,
+          "columns": [
+            "company_name"
+          ]
         }
       ]
     }

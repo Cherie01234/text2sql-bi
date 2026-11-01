@@ -7,6 +7,9 @@ from openai import OpenAI
 
 from .config import DEFAULT_MODEL, OPENROUTER_API_KEY, OPENROUTER_BASE_URL
 
+# Greedy decoding keeps outputs as stable as the provider allows (not fully deterministic).
+TEMPERATURE = 0
+
 SYSTEM_PROMPT = """You are an expert data analyst who writes DuckDB SQL.
 Rules:
 - Use ONLY the tables and columns in the provided schema.
@@ -58,6 +61,6 @@ def generate_sql(
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": user},
         ],
-        temperature=0,
+        temperature=TEMPERATURE,
     )
     return _clean(resp.choices[0].message.content or "")
