@@ -1,0 +1,125 @@
+{
+  "note": "q3 before the fix (question did not specify output columns). Re-run on 2026-11-01 with temperature=0, 3 runs per model.",
+  "evaluated_at": "2026-11-01",
+  "question": "Which employee handled the most orders?",
+  "gold_sql": "SELECT e.first_name, e.last_name, COUNT(*) AS order_count FROM orders o JOIN employees e ON e.employee_id = o.employee_id GROUP BY e.first_name, e.last_name ORDER BY order_count DESC LIMIT 1",
+  "gold_columns": [
+    "first_name",
+    "last_name",
+    "order_count"
+  ],
+  "runs": [
+    {
+      "model": "openai/gpt-4o-mini",
+      "run": 1,
+      "passed": false,
+      "columns": [
+        "employee_id",
+        "employee_name",
+        "order_count"
+      ],
+      "same_employee_as_gold": true,
+      "sql": "SELECT e.employee_id, CONCAT(e.first_name, ' ', e.last_name) AS employee_name, COUNT(o.order_id) AS order_count\nFROM employees AS e\nJOIN orders AS o ON e.employee_id = o.employee_id\nGROUP BY e.employee_id, e.first_name, e.last_name\nORDER BY order_count DESC\nLIMIT 1"
+    },
+    {
+      "model": "openai/gpt-4o-mini",
+      "run": 2,
+      "passed": false,
+      "columns": [
+        "employee_id",
+        "employee_name",
+        "order_count"
+      ],
+      "same_employee_as_gold": true,
+      "sql": "SELECT e.employee_id, CONCAT(e.first_name, ' ', e.last_name) AS employee_name, COUNT(o.order_id) AS order_count\nFROM employees AS e\nJOIN orders AS o ON e.employee_id = o.employee_id\nGROUP BY e.employee_id, e.first_name, e.last_name\nORDER BY order_count DESC\nLIMIT 1"
+    },
+    {
+      "model": "openai/gpt-4o-mini",
+      "run": 3,
+      "passed": false,
+      "columns": [
+        "employee_id",
+        "employee_name",
+        "order_count"
+      ],
+      "same_employee_as_gold": true,
+      "sql": "SELECT e.employee_id, CONCAT(e.first_name, ' ', e.last_name) AS employee_name, COUNT(o.order_id) AS order_count\nFROM employees AS e\nJOIN orders AS o ON e.employee_id = o.employee_id\nGROUP BY e.employee_id, e.first_name, e.last_name\nORDER BY order_count DESC\nLIMIT 1"
+    },
+    {
+      "model": "deepseek/deepseek-v4-flash",
+      "run": 1,
+      "passed": false,
+      "columns": [
+        "employee_id",
+        "first_name",
+        "last_name",
+        "order_count"
+      ],
+      "same_employee_as_gold": true,
+      "sql": "SELECT\n  e.employee_id,\n  e.first_name,\n  e.last_name,\n  COUNT(o.order_id) AS order_count\nFROM employees e\nJOIN orders o ON e.employee_id = o.employee_id\nGROUP BY e.employee_id, e.first_name, e.last_name\nORDER BY order_count DESC\nLIMIT 1"
+    },
+    {
+      "model": "deepseek/deepseek-v4-flash",
+      "run": 2,
+      "passed": true,
+      "columns": [
+        "first_name",
+        "last_name",
+        "order_count"
+      ],
+      "same_employee_as_gold": true,
+      "sql": "SELECT e.first_name, e.last_name, COUNT(o.order_id) AS order_count\nFROM employees e\nJOIN orders o ON e.employee_id = o.employee_id\nGROUP BY e.employee_id, e.first_name, e.last_name\nORDER BY order_count DESC\nLIMIT 1"
+    },
+    {
+      "model": "deepseek/deepseek-v4-flash",
+      "run": 3,
+      "passed": true,
+      "columns": [
+        "first_name",
+        "last_name",
+        "order_count"
+      ],
+      "same_employee_as_gold": true,
+      "sql": "SELECT e.first_name, e.last_name, COUNT(o.order_id) AS order_count\nFROM employees e\nJOIN orders o ON e.employee_id = o.employee_id\nGROUP BY e.employee_id, e.first_name, e.last_name\nORDER BY order_count DESC\nLIMIT 1"
+    },
+    {
+      "model": "google/gemini-2.5-flash-lite",
+      "run": 1,
+      "passed": false,
+      "columns": [
+        "employee_id",
+        "first_name",
+        "last_name",
+        "order_count"
+      ],
+      "same_employee_as_gold": true,
+      "sql": "SELECT\n  e.employee_id,\n  e.first_name,\n  e.last_name,\n  COUNT(o.order_id) AS order_count\nFROM employees AS e\nJOIN orders AS o\n  ON e.employee_id = o.employee_id\nGROUP BY\n  e.employee_id,\n  e.first_name,\n  e.last_name\nORDER BY\n  order_count DESC\nLIMIT 1"
+    },
+    {
+      "model": "google/gemini-2.5-flash-lite",
+      "run": 2,
+      "passed": false,
+      "columns": [
+        "employee_id",
+        "first_name",
+        "last_name",
+        "order_count"
+      ],
+      "same_employee_as_gold": true,
+      "sql": "SELECT\n  e.employee_id,\n  e.first_name,\n  e.last_name,\n  COUNT(o.order_id) AS order_count\nFROM employees AS e\nJOIN orders AS o\n  ON e.employee_id = o.employee_id\nGROUP BY\n  e.employee_id,\n  e.first_name,\n  e.last_name\nORDER BY\n  order_count DESC\nLIMIT 1"
+    },
+    {
+      "model": "google/gemini-2.5-flash-lite",
+      "run": 3,
+      "passed": false,
+      "columns": [
+        "employee_id",
+        "first_name",
+        "last_name",
+        "order_count"
+      ],
+      "same_employee_as_gold": true,
+      "sql": "SELECT\n  e.employee_id,\n  e.first_name,\n  e.last_name,\n  COUNT(o.order_id) AS order_count\nFROM employees AS e\nJOIN orders AS o\n  ON e.employee_id = o.employee_id\nGROUP BY\n  e.employee_id,\n  e.first_name,\n  e.last_name\nORDER BY\n  order_count DESC\nLIMIT 1"
+    }
+  ]
+}
